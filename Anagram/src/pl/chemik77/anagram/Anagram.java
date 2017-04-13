@@ -1,10 +1,13 @@
 package pl.chemik77.anagram;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Anagram {
 	static int size;
-	static char[] arrChar = new char[100];
+	static char[] arrChar = new char[20];
+	static ArrayList<String> list= new ArrayList<>();
+	static int count = 0;
 	
 	public static void main(String[] args) {
 		
@@ -17,6 +20,8 @@ public class Anagram {
 		setarrChar(line);
 		perm(size);
 		
+		display();
+		
 		input.close();
 	}
 
@@ -28,9 +33,16 @@ public class Anagram {
 		for(int i=0; i<k; i++) {
 			perm(k-1);
 			if(k == 2)
-				display();
+				addToList();
 			rotate(k);
 		}
+	}
+
+
+	private static void addToList() {
+		String word = new String(arrChar);
+		if(!list.contains(word))
+			list.add(word);
 	}
 
 
@@ -46,8 +58,8 @@ public class Anagram {
 
 
 	private static void display() {
-		for(int i=0; i<size; i++)
-			System.out.print(arrChar[i]);
+		for(int i=0; i<list.size(); i++)
+			System.out.print(list.get(i) + "\n");
 		System.out.println("");
 	}
 
